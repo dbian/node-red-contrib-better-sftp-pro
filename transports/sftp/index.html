@@ -11,6 +11,7 @@
     <label for="node-input-operation"  style="width: 120px;" ><i class="fa fa-wrench"></i> Operation</label>
     <select type="text" id="node-input-operation" style="width: calc(100% - 170px);"  >
       <option value="list">List Directory</option>
+      <option value="list_recursively">List Directory Recursively</option>
       <option value="get">Get</option>
       <option value="put">Put</option>
       <option value="delete">Delete File</option>
@@ -21,6 +22,10 @@
   <div class="form-row input-workdir-row">
     <label for="node-input-workdir" style="width: 120px;"  ><i class="fa fa-folder-open"></i> Working Directory</label>
     <input type="text" id="node-input-workdir" style="width: calc(100% - 170px);"  placeholder="Working Directory">
+  </div>
+  <div class="form-row input-filter-row hidden">
+    <label for="node-input-filter" style="width: 120px;"  ><i class="fa fa-folder-open"></i> File Filter</label>
+    <input type="text" id="node-input-filter" style="width: calc(100% - 170px);"  placeholder="eg.: \"mp4,avi,mkv\".Leave blank to scan all">
   </div>
   <div class="form-row input-filename-row hidden">
     <label for="node-input-filename" style="width: 120px;"  ><i class="fa fa-file"></i> Filename</label>
@@ -59,7 +64,8 @@
       operation: { value: 'list', required: true },
       filename: { value: '' },
       localFilename: { value: '' },
-      workdir: { value: '' }
+      workdir: { value: '' },
+      filefilters: { value: '' },
     },
     inputs: 1,
     outputs: 1,
@@ -74,34 +80,46 @@
       let filename = $(".input-filename-row");
       let localFilename = $(".input-localFilename-row");
       let workdir = $(".input-workdir-row");
+      let filefilters = $(".input-filter-row");
       $("#node-input-operation").change(function () {
         let id = $("#node-input-operation option:selected").val();
 
         switch (id) {
           case 'list':
             workdir.show();
+            filefilters.hide();
+            filename.hide();
+            localFilename.hide();
+            break;
+          case 'list_recursively':
+            workdir.show();
+            filefilters.show();
             filename.hide();
             localFilename.hide();
             break;
           case 'get':
           case 'put':
             filename.show();
+            filefilters.hide();
             workdir.show();
             localFilename.hide();
             break;
           case 'delete':
             filename.show();
+            filefilters.hide();
             workdir.show();
             localFilename.hide();
             break;
           case 'mkdir':
           case 'rmdir':
             workdir.show();
+            filefilters.hide();
             filename.hide();
             localFilename.hide();
             break;
           default:
             filename.show();
+            filefilters.hide();
             localFilename.hide();
             break;
         }
@@ -246,16 +264,16 @@
         });
 
         // in case paths were set from old SFTP config
-        if(this.key || this.keyname) {
+        if (this.key || this.keyname) {
           // $("#node-config-input-usekey").prop('checked', true);
-          if(this.key){
+          if (this.key) {
             $("#node-config-input-uselocalfiles").prop('checked', true);
           } else {
             $("#sftp-config-keyname").text(this.keyname);
           }
         }
 
-        if(this.password){
+        if (this.password) {
           $("#node-config-input-usepassword").prop('checked', true);
         }
 

@@ -59,6 +59,7 @@ module.exports = function (RED) {
         this.filename = n.filename;
         this.localFilename = n.localFilename;
         this.workdir = n.workdir;
+        this.filefilters = n.filefilters;
         this.sftpConfig = RED.nodes.getNode(this.sftp);
 
         // Validate config exists
@@ -127,8 +128,8 @@ module.exports = function (RED) {
                 return new Promise(async function (resolve, reject) {
                     try {
                         // Try password interative
-                        if(conSettings.tryKeyboard === true) {
-                            sftp.on('keyboard-interactive', function(name, instructions, instructionsLang, prompts, finish) {
+                        if (conSettings.tryKeyboard === true) {
+                            sftp.on('keyboard-interactive', function (name, instructions, instructionsLang, prompts, finish) {
                                 finish([conSettings.password]);
                             })
                         }
@@ -142,6 +143,9 @@ module.exports = function (RED) {
                                 let fileListing = await sftp.list(node.workdir);
                                 msg.payload = fileListing;
                                 node.send(msg);
+                                break;
+                            case 'list_recursively':
+                                await list_dir_recursively(sftp, msg);
                                 break;
                             case 'get':
                                 let getFtpFileName = path.join(node.workdir, node.filename);
@@ -202,6 +206,35 @@ module.exports = function (RED) {
                 handleError(error, msg);
             }
         });
+
+        async function list_dir_recursively(sftp, msg) {
+            let filters = node.filefilters.split(",");
+            var files = [];
+            list_dir_rec_with_filter(sftp, node.workdir, filters, files);
+            msg.payload = files;
+            node.send(msg);
+        }
+        async function list_dir_rec_with_filter(sftp, cur_path, filter_arr, dest) {
+            let files = await sftp.list(cur_path);
+            for (let index = 0; index < files.length; index++) {
+                const element = files[index];
+                if (element.type === '-') {
+                    let ext = path.extname(element.name);
+                    if (filter_arr.includes(ext))
+                        dest.push(element);
+                }
+                else {
+                    list_dir_rec_with_filter(
+                        sftp,
+                        path.join(cur_path, element.name),
+                        filter_arr,
+                        dest
+                    )
+                }
+            }
+
+        }
+
     }
     RED.nodes.registerType('sftp in', SFtpInNode);
 };
