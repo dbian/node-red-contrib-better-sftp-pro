@@ -1,6 +1,6 @@
 {
-  "name": "node-red-contrib-better-sftp-pro",
-  "version": "0.0.1",
+  "name": "@godlikejt/node-red-contrib-sftp",
+  "version": "0.0.5",
   "description": "A better node for SFTP communication, add recursive list support.",
   "main": "transports/sftp/index.js",
   "scripts": {
@@ -21,7 +21,7 @@
       "sftp": "transports/sftp/index.js"
     }
   },
-  "author": "dbian <bhd.shu@gmail.com>",
+  "author": "godlikejt <bianhuadong@live.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dbian/node-red-contrib-better-sftp-pro/issues"

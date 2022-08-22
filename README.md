@@ -13,7 +13,7 @@ Install
 
 Run the following command in the root directory of your Node-RED install
 
-    npm install node-red-contrib-better-sftp-pro
+    npm install @godlikejt/node-red-contrib-sftp
     
 SFTP
 -------

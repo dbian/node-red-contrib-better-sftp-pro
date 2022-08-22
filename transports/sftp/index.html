@@ -23,9 +23,9 @@
     <label for="node-input-workdir" style="width: 120px;"  ><i class="fa fa-folder-open"></i> Working Directory</label>
     <input type="text" id="node-input-workdir" style="width: calc(100% - 170px);"  placeholder="Working Directory">
   </div>
-  <div class="form-row input-filter-row hidden">
-    <label for="node-input-filter" style="width: 120px;"  ><i class="fa fa-folder-open"></i> File Filter</label>
-    <input type="text" id="node-input-filter" style="width: calc(100% - 170px);"  placeholder="eg.: \"mp4,avi,mkv\".Leave blank to scan all">
+  <div class="form-row input-filefilters-row hidden">
+    <label for="node-input-filefilters" style="width: 120px;"  ><i class="fa fa-folder-open"></i> File Filter</label>
+    <input type="text" id="node-input-filefilters" style="width: calc(100% - 170px);"  placeholder="eg.: .mp4,.avi,.mkv .Leave blank to scan all">
   </div>
   <div class="form-row input-filename-row hidden">
     <label for="node-input-filename" style="width: 120px;"  ><i class="fa fa-file"></i> Filename</label>
@@ -80,7 +80,7 @@
       let filename = $(".input-filename-row");
       let localFilename = $(".input-localFilename-row");
       let workdir = $(".input-workdir-row");
-      let filefilters = $(".input-filter-row");
+      let filefilters = $(".input-filefilters-row");
       $("#node-input-operation").change(function () {
         let id = $("#node-input-operation option:selected").val();
 

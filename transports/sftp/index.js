@@ -208,9 +208,14 @@ module.exports = function (RED) {
         });
 
         async function list_dir_recursively(sftp, msg) {
-            let filters = node.filefilters.split(",");
+            var filters = [];
+            if (node.filefilters === "" || node.filefilters == undefined) {
+            } else {
+                filters = node.filefilters.split(",");
+            }
+
             var files = [];
-            list_dir_rec_with_filter(sftp, node.workdir, filters, files);
+            await list_dir_rec_with_filter(sftp, node.workdir, filters, files);
             msg.payload = files;
             node.send(msg);
         }
@@ -220,11 +225,11 @@ module.exports = function (RED) {
                 const element = files[index];
                 if (element.type === '-') {
                     let ext = path.extname(element.name);
-                    if (filter_arr.includes(ext))
+                    if (filter_arr.length == 0 || filter_arr.includes(ext))
                         dest.push(element);
                 }
                 else {
-                    list_dir_rec_with_filter(
+                    await list_dir_rec_with_filter(
                         sftp,
                         path.join(cur_path, element.name),
                         filter_arr,
