@@ -1,4 +1,6 @@
-# node-red-contrib-better-sftp
+# node-red-contrib-better-sftp-pro
+
+**Add recursive list support.**
 
 Better SFTP was created out of necessity for a SFTP node which 
 was fully implemented and had several options to configure algorithms.
@@ -11,7 +13,7 @@ Install
 
 Run the following command in the root directory of your Node-RED install
 
-    npm install node-red-contrib-better-sftp
+    npm install node-red-contrib-better-sftp-pro
     
 SFTP
 -------
@@ -41,7 +43,7 @@ Algorithms are set to pre-defined default values. If you need to modify them see
 License
 -------
 
-See [license](https://github.com/sublime93/node-red-contrib-better-sftp/blob/master/LICENSE)
+See [license](https://github.com/dbian/node-red-contrib-better-sftp-pro/blob/master/LICENSE)
 
 
 [https://github.com/mscdex/ssh2-streams]: https://github.com/mscdex/ssh2-streams

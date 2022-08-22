@@ -1,14 +1,14 @@
 {
-  "name": "node-red-contrib-better-sftp",
-  "version": "0.0.12",
-  "description": "A better node for SFTP communication.",
+  "name": "node-red-contrib-better-sftp-pro",
+  "version": "0.0.1",
+  "description": "A better node for SFTP communication, add recursive list support.",
   "main": "transports/sftp/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rocky3598/node-red-contrib-better-sftp.git"
+    "url": "git+https://github.com/dbian/node-red-contrib-better-sftp-pro.git"
   },
   "keywords": [
     "node-red",
@@ -21,12 +21,12 @@
       "sftp": "transports/sftp/index.js"
     }
   },
-  "author": "Jordan Vohwinkel <jvohwinkel@gmail.com>",
+  "author": "dbian <bhd.shu@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rocky3598/node-red-contrib-better-sftp/issues"
+    "url": "https://github.com/dbian/node-red-contrib-better-sftp-pro/issues"
   },
-  "homepage": "https://github.com/rocky3598/node-red-contrib-better-sftp#readme",
+  "homepage": "https://github.com/dbian/node-red-contrib-better-sftp-pro#readme",
   "dependencies": {
     "ssh2-sftp-client": "^4.3.1"
   }
