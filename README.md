@@ -1,6 +1,8 @@
-# node-red-contrib-better-sftp-pro
 
 **Add High level operation: Recursive list and filter support.**
+
+**forked from sublime93/node-red-contrib-better-sftp**
+
 
 Better SFTP was created out of necessity for a SFTP node which 
 was fully implemented and had several options to configure algorithms.
@@ -18,6 +20,8 @@ Run the following command in the root directory of your Node-RED install
 SFTP
 -------
 **List Directory** - Lists contents of `msg.payload` as a directory OR working directory on node config.
+
+**List Directory Recursively** - with file extension filter support, eg: .avi,.srt,.mkv 
 
 **Get** - Set `msg.payload` to get the file OR working directory + file name in configuration will be used.
 
