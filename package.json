@@ -1,7 +1,7 @@
 {
   "name": "@godlikejt/node-red-contrib-sftp",
-  "version": "0.0.5",
-  "description": "A better node for SFTP communication, add recursive list support.",
+  "version": "0.0.6",
+  "description": "A better node for SFTP communication, add recursive list and filter support.",
   "main": "transports/sftp/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -28,6 +28,8 @@
   },
   "homepage": "https://github.com/dbian/node-red-contrib-better-sftp-pro#readme",
   "dependencies": {
+    "node-red-node-test-helper": "^0.3.0",
+    "node-red-project": "file:../../../root/.node-red",
     "ssh2-sftp-client": "^4.3.1"
   }
 }

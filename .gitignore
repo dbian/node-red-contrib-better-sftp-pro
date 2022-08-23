@@ -81,3 +81,4 @@ typings/
 
 # File system
 .DS_Store
+*.swp
