@@ -43,7 +43,7 @@ module.exports = function (RED) {
         };
     }
 
-    RED.nodes.registerType('sftp', SFtpNode, {
+    RED.nodes.registerType('sftpconfig', SFtpNode, {
         credentials: {
             username: { type: "text" },
             password: { type: "password" },
@@ -54,7 +54,7 @@ module.exports = function (RED) {
 
     function SFtpInNode(n) {
         RED.nodes.createNode(this, n);
-        this.sftp = n.sftp;
+        this.sftp = n.sftpconfig;
         this.operation = n.operation;
         this.filename = n.filename;
         this.localFilename = n.localFilename;
@@ -241,5 +241,5 @@ module.exports = function (RED) {
         }
 
     }
-    RED.nodes.registerType('sftp in', SFtpInNode);
+    RED.nodes.registerType('sftp node', SFtpInNode);
 };

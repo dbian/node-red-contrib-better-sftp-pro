@@ -1,11 +1,11 @@
-<script type="text/x-red" data-template-name="sftp in">
+<script type="text/x-red" data-template-name="sftp node">
   <div class="form-row">
       <label for="node-input-name" style="width: 120px;"  ><i class="icon-tag"></i> Name</label>
       <input type="text" id="node-input-name" style="width: calc(100% - 170px);"  placeholder="Name">
   </div>
   <div class="form-row">
-    <label for="node-input-sftp" style="width: 120px;"  ><i class="fa fa-server"></i> SFTP Server</label>
-    <input type="text" id="node-input-sftp" >
+    <label for="node-input-sftpconfig" style="width: 120px;"  ><i class="fa fa-server"></i> SFTP Server</label>
+    <input type="text" id="node-input-sftpconfig" >
   </div>
   <div class="form-row">
     <label for="node-input-operation"  style="width: 120px;" ><i class="fa fa-wrench"></i> Operation</label>
@@ -38,7 +38,7 @@
 <!--  <div class="form-tips"><b>Tip:</b> This is here to help.</div>-->
 </script>
 
-<script type="text/x-red" data-help-name="sftp in">
+<script type="text/x-red" data-help-name="sftp node">
    <p>SFTP incoming node. Used to read information from SFTP server</p>
    <h3>Outputs</h3>
        <dl class="message-properties">
@@ -47,6 +47,7 @@
        </dt>
    <h3>Details</h3>
    <p><b>List</b>: Listing directory contents returns an array of files found.</p>
+   <p><b>List Recursively</b>: Listing directory contents recursively returns an array of files found. In the meantime, you can use file filters.</p>
    <p><b>Get</b>: Gets a file from SFTP server and returns a buffer. Use file-in node to write buffer to file</p>
    <p><b>Put</b>: Writes a file to SFTP server in specified working directory. <code>msg.payload</code> can contain a location to the file, buffer stream, or single buffer object.</p>
    <p><b>Delete</b>: Deletes a file from the SFTP directory. File name is required.</p>
@@ -55,12 +56,12 @@
 </script>
 
 <script type="text/javascript">
-  RED.nodes.registerType('sftp in', {
+  RED.nodes.registerType('sftp node', {
     category: 'storage-input',
     color: "#AAAA66",
     defaults: {
       name: { value: '' },
-      sftp: { type: 'sftp', required: true },
+      sftp: { type: 'sftpconfig', required: true },
       operation: { value: 'list', required: true },
       filename: { value: '' },
       localFilename: { value: '' },
@@ -71,7 +72,7 @@
     outputs: 1,
     icon: "file-in.png",
     label: function () {
-      return this.name || 'sftp';
+      return this.name || 'sftp node';
     },
     labelStyle: function () {
       return this.name ? 'node_label_italic' : '';
@@ -128,7 +129,7 @@
   });
 </script>
 
-<script type="text/x-red" data-template-name="sftp">
+<script type="text/x-red" data-template-name="sftpconfig">
   <div class="form-row">
     <label for="node-config-input-host" style="width: 120px;" ><i class="fa fa-bookmark"></i> Host</label>
     <input type="text" id="node-config-input-host" placeholder="localhost" style="width: calc(100% - 310px);" />
@@ -197,7 +198,7 @@
 
 <script type="text/javascript">
   (function () {
-    RED.nodes.registerType('sftp', {
+    RED.nodes.registerType('sftpconfig', {
       category: 'config',
       defaults: {
         host: { value: 'localhost', required: true },
